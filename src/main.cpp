@@ -7,6 +7,8 @@
 #include "application/configuration_storage.h"
 #include "application/configuration_server.h"
 
+#define DEBUG
+
 bool need_to_restart = false;
 
 ConfigurationStorage* storage;
@@ -29,7 +31,7 @@ void ConnectToWiFi(ConfigurationStorage* storage) {
 }
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
     storage = new ConfigurationStorage();
 
     ConnectToWiFi(storage);
