@@ -16,6 +16,8 @@ public:
   void SetMqttUser(String conf);
   void SetMqttPassword(String conf);
   void SetMqttUri(String conf);
+  void SetMqttPort(String conf);
+  void SetMqttTopic(String conf);
   void SetDeviceName(String conf);
 
 private:
@@ -26,6 +28,8 @@ private:
     .mqtt_user = "",
     .mqtt_password = "",
     .mqtt_uri = "",
+    .mqtt_port = 1883,
+    .mqtt_topic = "",
     .device_name = "Temperature Sensor",
     .valid_config = 0xDEADBEEF
   };

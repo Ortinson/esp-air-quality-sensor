@@ -24,80 +24,39 @@
         <input type="number" name="monitor_period" value="%MONITOR_PERIOD%"> <br>
       </div>
     </div>
-
+    
     <div>
-      <label class="desc"> Build Period (s): </label>
+      <label class="desc"> MQTT user: </label>
       <div>
-        <input type="number" name="build_period" value="%BUILD_PERIOD%"> <br>
+        <input type="text" name="user" value="%MQTT_USER%"> <br>
       </div>
     </div>
 
     <div>
-      <label class="desc"> Jenkins user: </label>
+      <label class="desc"> MQTT password: </label>
       <div>
-        <input type="text" name="user" value="%USER%"> <br>
+        <input type="password" name="mqtt_password"> <br>
       </div>
     </div>
 
     <div>
-      <label class="desc"> Jenkins password: </label>
+      <label class="desc"> MQTT URI: </label>
       <div>
-        <input type="password" name="password"> <br>
+        <input type="text" name="MQTT uri", value="%MQTT_URI%"> <br>
       </div>
     </div>
 
     <div>
-      <label class="desc"> URI to check: </label>
+      <label class="desc"> MQTT port: </label>
       <div>
-        <input type="text" name="uri", value="%URI%"> <br>
+        <input type="number" name="mqtt_port" value="%MQTT_PORT%"> <br>
       </div>
     </div>
-
+    
     <div>
-      <label class="desc"> Success color: </label>
+      <label class="desc"> MQTT topic: </label>
       <div>
-        <select name="success_animation">
-          %SUCCESS_ANIMATION%
-        </select>
-        <input type="number" name="success_period" value="%SUCCESS_PERIOD%">
-        <input type="color" name="success_color", value="%SUCCESS_COLOR%">
-        <br>
-      </div>
-    </div>
-
-    <div>
-      <label class="desc"> Failure color: </label>
-      <div>
-        <select name="failure_animation">
-          %FAILURE_ANIMATION%
-        </select>
-        <input type="number" name="failure_period" value="%FAILURE_PERIOD%">
-        <input type="color" name="failure_color", value="%FAILURE_COLOR%">
-        <br>
-      </div>
-    </div>
-
-    <div>
-      <label class="desc"> Running color: </label>
-      <div>
-        <select name="running_animation">
-          %RUNNING_ANIMATION%
-        </select>
-        <input type="number" name="running_period" value="%RUNNING_PERIOD%">
-        <input type="color" name="running_color", value="%RUNNING_COLOR%">
-        <br>
-      </div>
-    </div>
-
-    <div>
-      <label class="desc"> Error color: </label>
-      <div>
-        <select name="error_animation">
-          %ERROR_ANIMATION%
-        </select>
-        <input type="number" name="error_period" value="%ERROR_PERIOD%">
-        <input type="color" name="error_color", value="%ERROR_COLOR%">
-        <br>
+        <input type="text" name="mqtt_topic", value="%MQTT_TOPIC%"> <br>
       </div>
     </div>
 

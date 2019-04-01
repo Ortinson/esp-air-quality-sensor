@@ -21,8 +21,8 @@ void ConfigurationServer::SendIndex(AsyncWebServerRequest *request){
 }
 
 void ConfigurationServer::UpdateConfig(AsyncWebServerRequest *request){
-  int args = request->args();
   #ifdef DEBUG
+    int args = request->args();
     for(int i=0;i<args;i++){
       Serial.printf("ARG[%s]: %s\n", request->argName(i).c_str(), request->arg(i).c_str());
     }
@@ -51,8 +51,18 @@ void ConfigurationServer::UpdateConfig(AsyncWebServerRequest *request){
     param = request->getParam("mqtt_uri", true)->value();
     this->_storage->SetMqttUri(param);
   }
+  if (request->hasParam("mqtt_port", true)) {
+    param = request->getParam("mqtt_port", true)->value();
+    this->_storage->SetMqttPort(param);
+  }
+  if (request->hasParam("mqtt_topic", true)) {
+    param = request->getParam("mqtt_topic", true)->value();
+    this->_storage->SetMqttTopic(param);
+  }
 
   this->SendIndex(request);
+  delay(1000);
+  ESP.restart();
 }
 
 String ConfigurationServer::IndexTemplateProcessor(const String& var) {
@@ -64,7 +74,10 @@ String ConfigurationServer::IndexTemplateProcessor(const String& var) {
     return String(this->_config->mqtt_uri);
   if(var == "MQTT_USER")
     return String(this->_config->mqtt_user);
-
+  if(var == "MQTT_PORT")
+    return String(this->_config->mqtt_port);
+  if(var == "MQTT_TOPIC")
+    return String(this->_config->mqtt_topic);
   return String();
 }
 

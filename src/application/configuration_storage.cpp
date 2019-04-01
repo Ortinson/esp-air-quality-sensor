@@ -44,6 +44,14 @@ void ConfigurationStorage::SetMqttUri(String conf) {
   conf.toCharArray(static_cast<char*>(this->_config.mqtt_uri), sizeof(this->_config.mqtt_uri));
   this->StoreConfig(&this->_config);
 }
+void ConfigurationStorage::SetMqttPort(String conf) {
+  this->_config.mqtt_port = std::atoi(conf.c_str());
+  this->StoreConfig(&this->_config);
+}
+void ConfigurationStorage::SetMqttTopic(String conf) {
+  conf.toCharArray(static_cast<char*>(this->_config.mqtt_topic), sizeof(this->_config.mqtt_topic));
+  this->StoreConfig(&this->_config);
+}
 
 void ConfigurationStorage::SubscribeToConfigChange(std::function<void(void)> callback) {
   this->_callback = callback;
