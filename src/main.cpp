@@ -49,7 +49,7 @@ void setup() {
   PubSubClient client(espClient);
   client.setServer(config->mqtt_uri, config->mqtt_port);
   client.connect(config->device_name, config->mqtt_user, config->mqtt_password);
-  client.publish(config->mqtt_topic, String(temp).c_str());  //TODO convert sensor data to char array
+  client.publish(config->mqtt_topic, String(temp).c_str());
   client.loop(); //NO IDEA, probably needed to send the message
   Serial.printf("Data sent./n");
 
@@ -58,3 +58,14 @@ void setup() {
 
 void loop() {
 }
+
+// TODO: implement batery saving strategy when wifi network is not avaiable.
+//   - Current situation the device stays as an active access point
+
+// TODO: Reduce power consumption by:
+  // - Having WIFI turned off by default
+  // - Storing N data adquisitions before turning on wifi and sending to server
+
+// TODO: Make sure data is sent correctly
+
+// TODO: Implement battery level measurement
