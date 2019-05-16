@@ -59,7 +59,7 @@ void ConfigurationServer::UpdateConfig(AsyncWebServerRequest *request){
     param = request->getParam("mqtt_topic", true)->value();
     this->_storage->SetMqttTopic(param);
   }
-
+  
   this->SendIndex(request);
   delay(1000);
   ESP.restart();
