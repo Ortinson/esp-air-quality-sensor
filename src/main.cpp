@@ -7,6 +7,7 @@
 #include "application/rtc_storage.h"
 #include "application/configuration_server.h"
 #include "application/cactus_io_BME280_I2C.h"
+#include "application/battery_level_calculator.h"
 
 bool need_to_restart = false;
 
@@ -14,6 +15,7 @@ ConfigurationStorage* storage;
 RTCStorage* rtc_storage;
 ConfigurationServer* server;
 WiFiManager* wifiManager;
+BatteryLevelCalculator* bat;
 config_t* config;
 
 void configModeCallback (WiFiManager *myWiFiManager) {
@@ -39,10 +41,10 @@ void Measure(){
   bme.readSensor();
   RTCStorage::rtc_data measurement;
   measurement.age=0;
-  measurement.battery= analogRead(A0);
   measurement.humidity = bme.getHumidity();
   measurement.pressure = bme.getPressure_MB();
   measurement.temperature = bme.getTemperature_C();
+  measurement.battery= bat->GetBatteryVoltage(analogRead(A0));
   digitalWrite(14, LOW);
 
   rtc_storage->StoreRTCData(measurement);
@@ -105,7 +107,7 @@ void DebugVector(){
   std::vector<RTCStorage::rtc_data> data = rtc_storage->GetRTCData();
   Serial.printf("Vector size: %d\n", data.size());
   for(it = data.begin(); it != data.end(); it++){
-    Serial.printf("%f, %i\n",it->temperature, it->battery);
+    Serial.printf("%f, %f\n",it->temperature, it->battery);
   }
 }
 
@@ -118,6 +120,7 @@ void setup() {
 
   storage = new ConfigurationStorage();
   rtc_storage = new RTCStorage();
+  bat = new BatteryLevelCalculator();
   config = storage->GetStoredConfig();
   if (!digitalRead(BUTTON_PIN)) {
     ConnectToWiFi(storage);

@@ -7,7 +7,7 @@
 class RTCStorage {
 public:
     typedef struct {
-    int battery;
+    double battery;
     double temperature;
     double humidity;
     double pressure;
