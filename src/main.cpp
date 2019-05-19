@@ -44,7 +44,7 @@ void Measure(){
   measurement.humidity = bme.getHumidity();
   measurement.pressure = bme.getPressure_MB();
   measurement.temperature = bme.getTemperature_C();
-  measurement.battery= bat->GetBatteryVoltage(analogRead(A0));
+  measurement.battery = bat->GetBatteryVoltage(analogRead(A0));
   digitalWrite(14, LOW);
 
   rtc_storage->StoreRTCData(measurement);
@@ -149,12 +149,12 @@ void loop() {
 }
 
 // TODO: implement battery saving strategy when wifi network is not avaiable.
-//   - Current situation the device stays as an active access point
+//   - Currently the device stays as an active access point
 
 // TODO: Reduce power consumption by:
   // - Having WIFI turned off by default
-  // - DONE Storing N data adquisitions before turning on wifi and sending to server
+  // - DONE: Storing N data adquisitions before turning on wifi and sending to server
 
-// TODO: Implement battery level measurement
+// DONE: Implement battery level measurement
 
 // DONE: Make sure data is sent correctly

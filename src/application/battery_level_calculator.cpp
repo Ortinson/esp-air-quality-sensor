@@ -1,11 +1,11 @@
 #include "battery_level_calculator.h"
 
-const float _vmax = 4.2;
+const float BatteryLevelCalculator::_vmax = 4.2;
 const float BatteryLevelCalculator::_vmin = 3;
 const float BatteryLevelCalculator::_vmax_adc = 1;
 const float BatteryLevelCalculator::_r1 = 100000;
-const float BatteryLevelCalculator::_r2 = 25000;
-const unsigned int BatteryLevelCalculator::_adc_precision = 2^10;
+const float BatteryLevelCalculator::_r2 = 25500;
+const unsigned int BatteryLevelCalculator::_adc_precision = 1023;
 
 BatteryLevelCalculator::BatteryLevelCalculator(){
     
@@ -24,5 +24,7 @@ unsigned int BatteryLevelCalculator::GetBatteryPercentage(unsigned int adc){
     // y = (x-3) * 100 / (4.2-3)
     float V = this->GetBatteryVoltage(adc);
     float percentage = (V - _vmin) * 100 / (_vmax - _vmin);
+    if (percentage > 100)
+        percentage = 100;
     return static_cast<unsigned int>(percentage);
 }
